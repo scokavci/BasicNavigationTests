@@ -14,18 +14,22 @@ public class TitleVerification2 {
                                           "https://westelm.com/");
 
         WebDriver driver = BrowserFactory.getDriver("chrome");
-        for(String eachurl : urls){
-            driver.get(eachurl);
-        }
+        //Ignore spaces and casein comparison.
 
-        for( String eachurl : urls ){
-             String currenturl = driver.getCurrentUrl();
-             if(currenturl.contains(driver.getTitle())){
-                 System.out.println("PASS");
-             }else{
-                 System.out.println("FAIL");
-             }
+        for( String eachurl : urls ) {
+            driver.get("CURRENT URL: "+ eachurl);
+            System.out.println(eachurl);
+            String title = driver.getTitle();
+            System.out.println("Title of the website:"+ title);
+
+            title = title.replace(" ","").toLowerCase();
+
+            if( eachurl.contains(title) ){
+                System.out.println("PASS");
+            }else{
+                System.out.println("FAIL");
+            }
         }
-        driver.close();
+        driver.quit();
     }
 }

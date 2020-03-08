@@ -8,21 +8,37 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class BrowserFactory {
 
+    /** This method takes browser and create
+     *  a WebDriver object based on browser
+     *
+     * @param browserName
+     * @return WebDriver
+     */
     public static WebDriver getDriver(String browserName) {
-        if (browserName.equalsIgnoreCase("chrome")) {
-            WebDriverManager.chromedriver().version("79.0").setup();
-            return new ChromeDriver();
-        } else if (browserName.equalsIgnoreCase("firefox")) {
-            WebDriverManager.firefoxdriver().setup();
-            return new FirefoxDriver();
-        } else if (browserName.equalsIgnoreCase("edge")) {
-            WebDriverManager.edgedriver().setup();
-            return new EdgeDriver();
-        } else if (browserName.equalsIgnoreCase("safari")) {
-            return null;
-        } else {
-            return null;
+        String operSystem = System.getProperty("os.name");
+        switch (browserName) {
+            case "edge":
+                if (operSystem.contains("mac")) {
+                    return null;
+                } else {
+                    WebDriverManager.edgedriver().setup();
+                    return new EdgeDriver();
+                }
+            case "safari":
+                if (operSystem.contains("windows")) {
+                    return null;
+                } else {
+                    System.out.println("I don't have safaridriver method in WebDriverManager class");
+                }
+            case "chrome":
+                WebDriverManager.chromedriver().version("79").setup();
+                return new ChromeDriver();
+            case "firefox":
+                WebDriverManager.firefoxdriver().setup();
+                return new FirefoxDriver();
         }
+        return null;
+
     }
 
 }

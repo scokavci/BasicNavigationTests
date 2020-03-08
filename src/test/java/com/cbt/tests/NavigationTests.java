@@ -5,31 +5,28 @@ import com.cbt.utilities.StringUtility;
 import org.openqa.selenium.WebDriver;
 
 public class NavigationTests {
-  static WebDriver driver;
 
     public static void main(String[] args) {
-      chromeTest();
-
+        navigateTests();
     }
-    public static void chromeTest(){
-        WebDriver driver = BrowserFactory.getDriver("chrome");
+        public static void navigateTests() {
+            WebDriver driver = BrowserFactory.getDriver("chrome");
 
-        driver.get("http://google.com");
-        String title1 = driver.getTitle();
+            driver.get("http://google.com");
+            String title1 = driver.getTitle();
 
-        driver.navigate().to(" https://etsy.com");
-        String title2 = driver.getTitle();
+            driver.navigate().to(" https://etsy.com");
+            String title2 = driver.getTitle();
 
-        driver.navigate().back();
-        String title3 = driver.getTitle();
-        StringUtility.verifyEquals(title1,title3);
+            driver.navigate().back();
+            String title3 = driver.getTitle();
+            StringUtility.verifyEquals(title1, title3);
 
-        driver.navigate().forward();
-        String title4 = driver.getTitle();
-        StringUtility.verifyEquals(title2,title4);
+            driver.navigate().forward();
+            String title4 = driver.getTitle();
+            StringUtility.verifyEquals(title2, title4);
 
-        driver.close();
+            driver.close();
 
+        }
     }
-
-}
